@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 import Tarefa from "./components/Tarefa";
+import Input from "./components/Input";
+import Button from "./components/Button";
 
 import "./App.css";
 
 function App(props) {
-  const [lista, setLista] = useState(["Tarefa1", "Tarefa2"]);
+  const [lista, setLista] = useState([]);
   const [novoItem, setNovoItem] = useState("");
 
   function adicionarNovoItem() {
@@ -21,15 +23,20 @@ function App(props) {
 
   return (
     <>
-      <input
-        value={novoItem}
-        type="text"
-        onChange={(e) => setNovoItem(e.target.value)}
-      ></input>
-      <button onClick={() => adicionarNovoItem()}>Adicionar</button>
-      <ul>
+      <div className="input-contaier">
+        <Input setNovoItem={setNovoItem} novoItem={novoItem} />
+        <Button adicionarNovoItem={adicionarNovoItem} />
+      </div>
+      <ul className="tarefa">
         {lista.map((item, index) => {
-          return <Tarefa key={index} tarefa={item} indice={index} deletarItem={deletarItem} />
+          return (
+            <Tarefa
+              key={index}
+              tarefa={item}
+              indice={index}
+              deletarItem={deletarItem}
+            />
+          );
         })}
       </ul>
     </>
