@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import Tarefa from "./components/Tarefa";
+
 import "./App.css";
 
 function App(props) {
@@ -16,10 +19,6 @@ function App(props) {
     setLista(tempArray);
   }
 
-  function completarTarefa(index) {
-    console.log(props);
-  }
-
   return (
     <>
       <input
@@ -29,19 +28,9 @@ function App(props) {
       ></input>
       <button onClick={() => adicionarNovoItem()}>Adicionar</button>
       <ul>
-        {lista.map((item, index) => (
-          <li key={index} >
-            {item}
-            <i
-              className="fa-solid fa-square-check"
-              onClick={() => completarTarefa(index)}
-            ></i>
-            <i
-              className="fa-solid fa-trash"
-              onClick={() => deletarItem(index)}
-            ></i>
-          </li>
-        ))}
+        {lista.map((item, index) => {
+          return <Tarefa key={index} tarefa={item} indice={index} deletarItem={deletarItem} />
+        })}
       </ul>
     </>
   );
